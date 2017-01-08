@@ -8,6 +8,19 @@
   <artifactId>dailyhelper-service</artifactId>
   <description></description>
   <dependencies>
+    <!-- dailyhelper modules -->
+    <dependency>
+      <groupId>com.easytoolsoft</groupId>
+      <artifactId>dailyhelper-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.easytoolsoft</groupId>
+      <artifactId>dailyhelper-data</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.easytoolsoft</groupId>
+      <artifactId>dailyhelper-domain</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>

@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.easytoolsoft.dailyhelper.data.repository.RecordRepository">
+    <!-- CodeBuilder  Generated-->
+    <resultMap id="RecordMap" type="com.easytoolsoft.dailyhelper.domain.Record">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="staff_id" property="staffId" jdbcType="INTEGER"/>
+        <result column="date" property="date" jdbcType="INTEGER"/>
+        <result column="yestoday" property="yestoday" jdbcType="VARCHAR"/>
+        <result column="today" property="today" jdbcType="VARCHAR"/>
+        <result column="memo" property="memo" jdbcType="VARCHAR"/>
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP"/>
+        <result column="gmt_updated" property="gmtUpdated" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+  	4406id ,staff_id ,date ,yestoday ,today ,memo ,gmt_created ,gmt_updated 	  </sql>
+    <sql id="Insert_Columns">
+        <if test="staffId != null">staff_id,</if>
+        <if test="date != null">date,</if>
+        <if test="yestoday != null">yestoday,</if>
+        <if test="today != null">today,</if>
+        <if test="memo != null">memo,</if>
+        <if test="gmtCreated != null">gmt_created,</if>
+        <if test="gmtUpdated != null">gmt_updated,</if>
+    </sql>
+    <sql id="Insert_Values">
+        <if test="staffId != null">#{staffId,jdbcType=INTEGER},</if>
+        <if test="date != null">#{date,jdbcType=INTEGER},</if>
+        <if test="yestoday != null">#{yestoday,jdbcType=VARCHAR},</if>
+        <if test="today != null">#{today,jdbcType=VARCHAR},</if>
+        <if test="memo != null">#{memo,jdbcType=VARCHAR},</if>
+        <if test="gmtCreated != null">#{gmtCreated,jdbcType=TIMESTAMP},</if>
+        <if test="gmtUpdated != null">#{gmtUpdated,jdbcType=TIMESTAMP},</if>
+    </sql>
+    <sql id="Batch_Insert_Values">
+        <if test="id != null">#{id,jdbcType=INTEGER},</if>
+        <if test="staffId != null">#{staffId,jdbcType=INTEGER},</if>
+        <if test="date != null">#{date,jdbcType=INTEGER},</if>
+        <if test="yestoday != null">#{yestoday,jdbcType=VARCHAR},</if>
+        <if test="today != null">#{today,jdbcType=VARCHAR},</if>
+        <if test="memo != null">#{memo,jdbcType=VARCHAR},</if>
+        <if test="gmtCreated != null">#{gmtCreated,jdbcType=TIMESTAMP},</if>
+        <if test="gmtUpdated != null">#{gmtUpdated,jdbcType=TIMESTAMP},</if>
+    </sql>
+    <sql id="Select_Where_From_Map">
+        <if test="id != null">and id = #{id,jdbcType=INTEGER}</if>
+        <if test="staffId != null">and staff_id = #{staffId,jdbcType=INTEGER}</if>
+        <if test="date != null">and date = #{date,jdbcType=INTEGER}</if>
+        <if test="yestoday != null">and yestoday = #{yestoday,jdbcType=VARCHAR}</if>
+        <if test="today != null">and today = #{today,jdbcType=VARCHAR}</if>
+        <if test="memo != null">and memo = #{memo,jdbcType=VARCHAR}</if>
+        <if test="gmtCreated != null">and gmt_created = #{gmtCreated,jdbcType=TIMESTAMP}</if>
+        <if test="gmtUpdated != null">and gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP}</if>
+    </sql>
+    <sql id="Update_Set_From_Bean">
+        <if test="staffId != null">staff_id = #{staffId,jdbcType=INTEGER} ,</if>
+        <if test="date != null">date = #{date,jdbcType=INTEGER} ,</if>
+        <if test="yestoday != null">yestoday = #{yestoday,jdbcType=VARCHAR} ,</if>
+        <if test="today != null">today = #{today,jdbcType=VARCHAR} ,</if>
+        <if test="memo != null">memo = #{memo,jdbcType=VARCHAR} ,</if>
+        <if test="gmtCreated != null">gmt_created = #{gmtCreated,jdbcType=TIMESTAMP} ,</if>
+        <if test="gmtUpdated != null">gmt_updated = #{gmtUpdated,jdbcType=TIMESTAMP} ,</if>
+    </sql>
+    <sql id="Update_Set_From_Map">
+        <if test="set.staffId != null">staff_id = #{set.staffId,jdbcType=INTEGER} ,</if>
+        <if test="set.date != null">date = #{set.date,jdbcType=INTEGER} ,</if>
+        <if test="set.yestoday != null">yestoday = #{set.yestoday,jdbcType=VARCHAR} ,</if>
+        <if test="set.today != null">today = #{set.today,jdbcType=VARCHAR} ,</if>
+        <if test="set.memo != null">memo = #{set.memo,jdbcType=VARCHAR} ,</if>
+        <if test="set.gmtCreated != null">gmt_created = #{set.gmtCreated,jdbcType=TIMESTAMP} ,</if>
+        <if test="set.gmtUpdated != null">gmt_updated = #{set.gmtUpdated,jdbcType=TIMESTAMP} ,</if>
+    </sql>
+    <sql id="Update_Where_From_Map">
+        <if test="where.id != null">and id = #{where.id,jdbcType=INTEGER}</if>
+        <if test="where.staffId != null">and staff_id = #{where.staffId,jdbcType=INTEGER}</if>
+        <if test="where.date != null">and date = #{where.date,jdbcType=INTEGER}</if>
+        <if test="where.yestoday != null">and yestoday = #{where.yestoday,jdbcType=VARCHAR}</if>
+        <if test="where.today != null">and today = #{where.today,jdbcType=VARCHAR}</if>
+        <if test="where.memo != null">and memo = #{where.memo,jdbcType=VARCHAR}</if>
+        <if test="where.gmtCreated != null">and gmt_created = #{where.gmtCreated,jdbcType=TIMESTAMP}</if>
+        <if test="where.gmtUpdated != null">and gmt_updated = #{where.gmtUpdated,jdbcType=TIMESTAMP}</if>
+    </sql>
+    <sql id="BatchUpdate_Set_From_Bean">
+        <if test="item.staffId != null">staff_id = #{item.staffId,jdbcType=INTEGER} ,</if>
+        <if test="item.date != null">date = #{item.date,jdbcType=INTEGER} ,</if>
+        <if test="item.yestoday != null">yestoday = #{item.yestoday,jdbcType=VARCHAR} ,</if>
+        <if test="item.today != null">today = #{item.today,jdbcType=VARCHAR} ,</if>
+        <if test="item.memo != null">memo = #{item.memo,jdbcType=VARCHAR} ,</if>
+        <if test="item.gmtCreated != null">gmt_created = #{item.gmtCreated,jdbcType=TIMESTAMP} ,</if>
+        <if test="item.gmtUpdated != null">gmt_updated = #{item.gmtUpdated,jdbcType=TIMESTAMP} ,</if>
+    </sql>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from dh_record where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="delete" parameterType="java.util.Map">
+        delete from dh_record
+        <where>
+            <include refid="Select_Where_From_Map"/>
+        </where>
+    </delete>
+    <delete id="deleteIn">
+        delete from dh_record where id in
+        <foreach collection="records" item="item" index="index" open="(" separator="," close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.easytoolsoft.easyreport.metadata.po.Report">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into dh_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Columns"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Insert_Values"/>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into dh_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_List"/>
+        </trim>
+        values
+        <foreach collection="record" item="item" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <include refid="Batch_Insert_Values"/>
+            </trim>
+        </foreach>
+    </insert>
+    <select id="selectById" resultMap="RecordMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from dh_record
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="select" resultMap="RecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from dh_record
+        <where>
+            <include refid="Select_Where_From_Map"/>
+        </where>
+    </select>
+    <select id="selectOne" resultMap="RecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from dh_record
+        <where>
+            <include refid="Select_Where_From_Map"/>
+        </where>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="RecordMap" parameterType="java.util.List">
+        select
+        <include refid="Base_Column_List"/>
+        from dh_record
+        where id IN
+        <foreach collection="record" item="item" index="index" open="(" separator="," close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </select>
+    <update id="updateById" parameterType="com.easytoolsoft.easyreport.metadata.po.Report">
+        update dh_record
+        <set>
+            <include refid="Update_Set_From_Bean"/>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="update" parameterType="java.util.Map">
+        update dh_record
+        <set>
+            <include refid="Update_Set_From_Map"/>
+        </set>
+        <where>
+            <include refid="Update_Where_From_Map"/>
+        </where>
+    </update>
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="records" item="item" index="index" open="" close="" separator=";">
+            update dh_record
+            <include refid="BatchUpdate_Set_From_Bean"/>
+            where id=#{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <select id="countByPager" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from dh_record
+        <where>
+            <if test="where.keyword != null">
+                ${where.fieldName} LIKE CONCAT('%', #{where.keyword, jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+    <select id="selectByPager" resultMap="RecordMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from dh_record
+        <where>
+            <if test="where.keyword != null">
+                ${where.fieldName} LIKE CONCAT('%', #{where.keyword, jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+        <if test="pager.sortItem != null and pager.sortItem != '' ">
+            order by ${pager.sortItem} ${pager.sortType}
+        </if>
+        limit #{pager.startIndex} , #{pager.pageSize}
+    </select>
+    <select id="count" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) as total from dh_record
+        <where>
+            <include refid="Select_Where_From_Map"/>
+        </where>
+    </select>
+    <!-- My Custom Interfaces -->
+</mapper>
