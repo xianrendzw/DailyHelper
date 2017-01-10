@@ -621,6 +621,11 @@ public class RecordExample {
         protected Criteria() {
             super();
         }
+
+        public Criteria andFieldLike(String fieldName, String keyword) {
+            addCriterion(fieldName + " like ", keyword, fieldName);
+            return this;
+        }
     }
 
     public static class Criterion {
