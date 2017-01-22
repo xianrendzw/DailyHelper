@@ -12,8 +12,73 @@
         <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP"/>
         <result column="gmt_updated" property="gmtUpdated" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <sql id="Example_Where_Clause1">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Example_Where_Clause2">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List_Without_Id">
+       id ,staff_id ,date ,yestoday ,today ,memo ,gmt_created ,gmt_updated
+    </sql>
     <sql id="Base_Column_List">
-  	4406id ,staff_id ,date ,yestoday ,today ,memo ,gmt_created ,gmt_updated 	  </sql>
+        id ,
+        <include refid="Base_Column_List_Without_Id"/>
+    </sql>
     <sql id="Insert_Columns">
         <if test="staffId != null">staff_id,</if>
         <if test="date != null">date,</if>
@@ -89,22 +154,8 @@
         <if test="item.gmtCreated != null">gmt_created = #{item.gmtCreated,jdbcType=TIMESTAMP} ,</if>
         <if test="item.gmtUpdated != null">gmt_updated = #{item.gmtUpdated,jdbcType=TIMESTAMP} ,</if>
     </sql>
-    <delete id="deleteById" parameterType="java.lang.Integer">
-        delete from dh_record where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <delete id="delete" parameterType="java.util.Map">
-        delete from dh_record
-        <where>
-            <include refid="Select_Where_From_Map"/>
-        </where>
-    </delete>
-    <delete id="deleteIn">
-        delete from dh_record where id in
-        <foreach collection="records" item="item" index="index" open="(" separator="," close=")">
-            #{item.id,jdbcType=INTEGER}
-        </foreach>
-    </delete>
-    <insert id="insert" parameterType="com.easytoolsoft.easyreport.metadata.po.Report">
+    <!-- insert -->
+    <insert id="insert" parameterType="com.easytoolsoft.dailyhelper.domain.Record">
         <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -119,48 +170,35 @@
     <insert id="batchInsert" parameterType="java.util.List">
         insert into dh_record
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <include refid="Base_Column_List"/>
+            <include refid="Base_Column_List_Without_Id"/>
         </trim>
         values
-        <foreach collection="record" item="item" index="index" separator=",">
+        <foreach collection="list" item="item" index="index" separator=",">
             <trim prefix="(" suffix=")" suffixOverrides=",">
                 <include refid="Batch_Insert_Values"/>
             </trim>
         </foreach>
     </insert>
-    <select id="selectById" resultMap="RecordMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from dh_record
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <select id="select" resultMap="RecordMap" parameterType="java.util.Map">
-        select
-        <include refid="Base_Column_List"/>
-        from dh_record
-        <where>
-            <include refid="Select_Where_From_Map"/>
-        </where>
-    </select>
-    <select id="selectOne" resultMap="RecordMap" parameterType="java.util.Map">
-        select
-        <include refid="Base_Column_List"/>
-        from dh_record
-        <where>
-            <include refid="Select_Where_From_Map"/>
-        </where>
-        limit 1
-    </select>
-    <select id="selectIn" resultMap="RecordMap" parameterType="java.util.List">
-        select
-        <include refid="Base_Column_List"/>
-        from dh_record
-        where id IN
-        <foreach collection="record" item="item" index="index" open="(" separator="," close=")">
+    <!-- end insert -->
+    <!-- delete -->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from dh_record where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.easytoolsoft.dailyhelper.data.repository.example.RecordExample">
+        delete from dh_record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause1"/>
+        </if>
+    </delete>
+    <delete id="deleteIn">
+        delete from dh_record where id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
             #{item.id,jdbcType=INTEGER}
         </foreach>
-    </select>
-    <update id="updateById" parameterType="com.easytoolsoft.easyreport.metadata.po.Report">
+    </delete>
+    <!-- end delete -->
+    <!-- update -->
+    <update id="updateById" parameterType="com.easytoolsoft.dailyhelper.domain.Record">
         update dh_record
         <set>
             <include refid="Update_Set_From_Bean"/>
@@ -172,44 +210,84 @@
         <set>
             <include refid="Update_Set_From_Map"/>
         </set>
-        <where>
-            <include refid="Update_Where_From_Map"/>
-        </where>
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause2"/>
+        </if>
     </update>
     <update id="batchUpdate" parameterType="java.util.List">
-        <foreach collection="records" item="item" index="index" open="" close="" separator=";">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update dh_record
             <include refid="BatchUpdate_Set_From_Bean"/>
             where id=#{item.id,jdbcType=INTEGER}
         </foreach>
     </update>
+    <!-- end update -->
+    <!-- select -->
+    <select id="selectById" resultMap="RecordMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from dh_record
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByExample" resultMap="RecordMap"
+            parameterType="com.easytoolsoft.dailyhelper.data.repository.example.RecordExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from dh_record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause1"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectOneByExample" resultMap="RecordMap"
+            parameterType="com.easytoolsoft.dailyhelper.data.repository.example.RecordExample">
+        select
+        <include refid="Base_Column_List"/>
+        from dh_record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause1"/>
+        </if>
+        limit 1
+    </select>
+    <select id="selectIn" resultMap="RecordMap" parameterType="java.util.List">
+        select
+        <include refid="Base_Column_List"/>
+        from dh_record
+        where id IN
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </select>
+    <select id="countByExample" resultType="java.lang.Integer"
+            parameterType="com.easytoolsoft.dailyhelper.data.repository.example.RecordExample">
+        select count(*) as total from dh_record
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause1"/>
+        </if>
+    </select>
     <select id="countByPager" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(*) as total from dh_record
-        <where>
-            <if test="where.keyword != null">
-                ${where.fieldName} LIKE CONCAT('%', #{where.keyword, jdbcType=VARCHAR},'%')
-            </if>
-        </where>
+        <if test="example != null">
+            <include refid="Example_Where_Clause2"/>
+        </if>
     </select>
     <select id="selectByPager" resultMap="RecordMap" parameterType="java.util.Map">
         select
         <include refid="Base_Column_List"/>
         from dh_record
-        <where>
-            <if test="where.keyword != null">
-                ${where.fieldName} LIKE CONCAT('%', #{where.keyword, jdbcType=VARCHAR},'%')
-            </if>
-        </where>
+        <if test="example != null">
+            <include refid="Example_Where_Clause2"/>
+        </if>
         <if test="pager.sortItem != null and pager.sortItem != '' ">
             order by ${pager.sortItem} ${pager.sortType}
         </if>
         limit #{pager.startIndex} , #{pager.pageSize}
     </select>
-    <select id="count" resultType="java.lang.Integer" parameterType="java.util.Map">
-        select count(*) as total from dh_record
-        <where>
-            <include refid="Select_Where_From_Map"/>
-        </where>
-    </select>
+    <!-- end select -->
     <!-- My Custom Interfaces -->
 </mapper>
