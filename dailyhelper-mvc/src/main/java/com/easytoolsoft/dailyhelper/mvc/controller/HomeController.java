@@ -25,14 +25,21 @@ package com.easytoolsoft.dailyhelper.mvc.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author tomdeng on 17/1/10.
+ * @author tomdeng on 17/1/22.
  */
 @Slf4j
-@Controller
-@RequestMapping(value = "/pages")
-public class PageController {
+@RestController
+@RequestMapping(value = "/")
+public class HomeController {
+    @Autowired
+    private Environment environment;
+
+    @RequestMapping("/")
+    public String[] profile() {
+        return environment.getActiveProfiles();
+    }
 }
