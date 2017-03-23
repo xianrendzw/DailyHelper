@@ -42,4 +42,32 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <props>src/main/filters/application-dev.properties</props>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <props>src/main/filters/application-test.properties</props>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <props>src/main/filters/application-prod.properties</props>
+            </properties>
+        </profile>
+    </profiles>
+    <build>
+        <filters>
+            <filter>${props}</filter>
+        </filters>
+    </build>
 </project>
