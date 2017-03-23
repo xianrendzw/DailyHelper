@@ -162,7 +162,7 @@
     <delete id="deleteById" parameterType="java.lang.Integer">
         delete from dh_staff where id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteByExample" parameterType="com.easytoolsoft.dailyhelper.data.repository.example.StaffExample">
+    <delete id="deleteByExample" parameterType="com.easytoolsoft.dailyhelper.domain.StaffExample">
         delete from dh_staff
         <if test="_parameter != null">
             <include refid="Example_Where_Clause1"/>
@@ -208,7 +208,7 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <select id="selectByExample" resultMap="StaffMap"
-            parameterType="com.easytoolsoft.dailyhelper.data.repository.example.StaffExample">
+            parameterType="com.easytoolsoft.dailyhelper.domain.StaffExample">
         select
         <if test="distinct">
             distinct
@@ -223,7 +223,7 @@
         </if>
     </select>
     <select id="selectOneByExample" resultMap="StaffMap"
-            parameterType="com.easytoolsoft.dailyhelper.data.repository.example.StaffExample">
+            parameterType="com.easytoolsoft.dailyhelper.domain.StaffExample">
         select
         <include refid="Base_Column_List"/>
         from dh_staff
@@ -242,7 +242,7 @@
         </foreach>
     </select>
     <select id="countByExample" resultType="java.lang.Integer"
-            parameterType="com.easytoolsoft.dailyhelper.data.repository.example.StaffExample">
+            parameterType="com.easytoolsoft.dailyhelper.domain.StaffExample">
         select count(*) as total from dh_staff
         <if test="_parameter != null">
             <include refid="Example_Where_Clause1"/>

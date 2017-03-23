@@ -184,7 +184,7 @@
     <delete id="deleteById" parameterType="java.lang.Integer">
         delete from dh_record where id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteByExample" parameterType="com.easytoolsoft.dailyhelper.data.repository.example.RecordExample">
+    <delete id="deleteByExample" parameterType="com.easytoolsoft.dailyhelper.domain.RecordExample">
         delete from dh_record
         <if test="_parameter != null">
             <include refid="Example_Where_Clause1"/>
@@ -230,7 +230,7 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <select id="selectByExample" resultMap="RecordMap"
-            parameterType="com.easytoolsoft.dailyhelper.data.repository.example.RecordExample">
+            parameterType="com.easytoolsoft.dailyhelper.domain.RecordExample">
         select
         <if test="distinct">
             distinct
@@ -245,7 +245,7 @@
         </if>
     </select>
     <select id="selectOneByExample" resultMap="RecordMap"
-            parameterType="com.easytoolsoft.dailyhelper.data.repository.example.RecordExample">
+            parameterType="com.easytoolsoft.dailyhelper.domain.RecordExample">
         select
         <include refid="Base_Column_List"/>
         from dh_record
@@ -264,7 +264,7 @@
         </foreach>
     </select>
     <select id="countByExample" resultType="java.lang.Integer"
-            parameterType="com.easytoolsoft.dailyhelper.data.repository.example.RecordExample">
+            parameterType="com.easytoolsoft.dailyhelper.domain.RecordExample">
         select count(*) as total from dh_record
         <if test="_parameter != null">
             <include refid="Example_Where_Clause1"/>
